@@ -6,10 +6,21 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-        String targetOperation = scanner.nextLine();
-        String inputText = scanner.nextLine();
-        int shift = scanner.nextInt();
+        Command command = new Command();
+        for (int i = 0; i < args.length; i++) {
+            if (args[i].equals("-mode")) {
+                command.setUserChoice(args[i+1]);
+            } else if (args[i].equals("-key")) {
+                command.setShift(Integer.parseInt(args[i+1]));
+            } else if (args[i].equals("-data")) {
+                command.setText(args[i+1]);
+            }
+        }
+
+        //Scanner scanner = new Scanner(System.in);
+        String targetOperation = command.getUserChoice();
+        String inputText = command.getText();
+        int shift = command.getShift();
 
         if (targetOperation.equals("enc")) {
             String encryptedText = Key.encryptUsingAscii(inputText, shift);
